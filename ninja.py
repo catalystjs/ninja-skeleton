@@ -88,15 +88,15 @@ def init():
         you get the added benefit of being able to pass around a dictionary.
         """
         parser = argparse.ArgumentParser(**kwargs)
-        parser.add_argument('framework', metavar='framework', nargs='?',
-                            default='django',
-                            help='Framework you want to generate a skeleton for: \
-                            example: django. django is the default if nothing \
-                            is specified')
         parser.add_argument('projectname', metavar='project name', nargs='?',
                             default='main_project',
                             help='Name of the project you want to create. \
                             main_project is the default is none is specified')
+        parser.add_argument('--framework', metavar='framework', nargs='?',
+                            default='django',
+                            help='Framework you want to generate a skeleton for: \
+                            example: django. django is the default if nothing \
+                            is specified')
         parser.add_argument('--directory', default=os.getcwd(), type=str,
                             help="Directory where you want these directories and files \
                             For example, you can use a relative path '~/Documents/<etc>' \
