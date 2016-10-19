@@ -91,10 +91,12 @@ def init():
         parser.add_argument('framework', metavar='framework', nargs='?',
                             default='django',
                             help='Framework you want to generate a skeleton for: \
-                            example: django')
-        parser.add_argument('projectname', metavar='project name', nargs='+',
+                            example: django. django is the default if nothing \
+                            is specified')
+        parser.add_argument('projectname', metavar='project name', nargs='?',
                             default='main_project',
-                            help='Name of the project you want to create')
+                            help='Name of the project you want to create. \
+                            main_project is the default is none is specified')
         parser.add_argument('--directory', default=os.getcwd(), type=str,
                             help="Directory where you want these directories and files \
                             For example, you can use a relative path '~/Documents/<etc>' \
@@ -102,7 +104,8 @@ def init():
                             Must include the final / sign")
         parser.add_argument('--apps', default=['main_app'], type=str, nargs='*',
                             help='Applications you want to have configured. Multiple applications \
-                            Can be specified')
+                            Can be specified. main_app is default if no applications \
+                            are specified')
         args = parser.parse_args()
         # Return the arguements to the main script
         return args
@@ -240,10 +243,10 @@ def create_content_directories(directory, app_name):
 # Main function (default processor)
 def main(args):
     # Pull out the projectname from the list
-    projectname = args.projectname[0]
+    projectname = args.projectname
     print('Calling for all skeleton setup for %s framework...' % args.framework)
     # Set the call args for the django-admin startproject
-    call_args = ['django-admin', 'startproject', args.projectname[0]]
+    call_args = ['django-admin', 'startproject', args.projectname]
     # Make an external call to django-admin for our startproject
     # Dirty, but gets the job done without creating an instance of the class
     result = call(call_args, cwd=args.directory)
