@@ -55,7 +55,7 @@ URL_FILE = [
             "",
             "# URL patterns to process for the application",
             "urlpatterns = [",
-            "\turl(r'^$', views.index, name='index')",
+            "\turl(r'^$', views.index, name='index'),",
             "\t#url(r'^course/add$', views.course_add, name='course_add'),",
             "\t#url(r'^course/destroy/(?P<course_id>\d+)$', views.course_destroy, name='destroy'),",
             "\t#url(r'^course/delete/(?P<course_id>\d+)$', views.course_remove, name='course_remove'),",
