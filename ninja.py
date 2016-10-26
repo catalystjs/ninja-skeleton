@@ -106,6 +106,10 @@ def init():
                             help='Applications you want to have configured. Multiple applications \
                             Can be specified. main_app is default if no applications \
                             are specified')
+        parser.add_argument('--no_migrate', action='store_true', default=False,
+                            help='This will disable python manage.py migrate after \
+                            The skeleton is built. Use this if you need to change the \
+                            default authentication system')
         args = parser.parse_args()
         # Return the arguements to the main script
         return args
@@ -299,10 +303,11 @@ def main(args):
     # Modify the existing project urls.py file
     modify_urls(directory=base_project_path, modified=apps_urls)
     print ('Framework skeleton complete...')
-    print ('Running migrations for initialization...')
-    # Migrate settings so that request is proper and associated table exists
-    call_args = ['python', 'manage.py', 'migrate']
-    call(args=call_args, cwd='/'.join([args.directory, projectname]))
+    if not args.no_migrate:
+        print ('Running migrations for initialization...')
+        # Migrate settings so that request is proper and associated table exists
+        call_args = ['python', 'manage.py', 'migrate']
+        call(args=call_args, cwd='/'.join([args.directory, projectname]))
     print ('Project skeleton creation completed successfully!')
 
 
